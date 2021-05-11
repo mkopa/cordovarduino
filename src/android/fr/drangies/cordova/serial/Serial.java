@@ -391,11 +391,7 @@ public class Serial extends CordovaPlugin {
 		cordova.getThreadPool().execute(new Runnable() {
 			public void run() {
 				try {
-					// Make sure we don't die if we try to close an non-existing port!
-					if (port != null) {
-						port.close();
-					}
-					port = null;
+					port.close();
 					callbackContext.success();
 				}
 				catch (IOException e) {
@@ -479,14 +475,11 @@ public class Serial extends CordovaPlugin {
 	public void onPause(boolean multitasking) {
 		if (sleepOnPause) {
 			stopIoManager();
-			if (port != null) {
 				try {
 					port.close();
 				} catch (IOException e) {
 					// Ignore
 				}
-				port = null;
-			}
 		}
 	}
 

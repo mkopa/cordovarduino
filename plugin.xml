@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     id="cordovarduino"
-    version="0.0.10">
+    version="0.0.11">
     <name>Serial</name>
     <description>Cordova plugin to communicate with the android USB serial port</description>
     <license>MIT</license>
@@ -20,13 +20,10 @@
                 <param name="android-package" value="fr.drangies.cordova.serial.Serial"/>
             </feature>
         </config-file>
-
-
-		<source-file src="src/android/fr/drangies/cordova/serial/Serial.java" target-dir="src/fr/drangies/cordova/serial" />
-        <source-file src="src/android/fr/drangies/cordova/serial/UsbBroadcastReceiver.java" target-dir="src/fr/drangies/cordova/serial" />
-		<framework src="com.github.mik3y:usb-serial-for-android:3.3.3" />
-
-	</platform>
+        <source-file src="src/android/fr/drangies/cordova/serial/Serial.java" target-dir="src/fr/drangies/cordova/serial" />
+   	    <source-file src="src/android/fr/drangies/cordova/serial/UsbBroadcastReceiver.java" target-dir="src/fr/drangies/cordova/serial" />
+        <framework src="com.github.mik3y:usb-serial-for-android:3.3.3" />
+    </platform>
 
     <!-- ubuntu -->
     <platform name="ubuntu">
