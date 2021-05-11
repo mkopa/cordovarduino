@@ -69,10 +69,10 @@ public class Serial extends CordovaPlugin {
 	private boolean setDTR;
 	private boolean setRTS;
 	private boolean sleepOnPause;
-	
+
 	// callback that will be used to send back data to the cordova app
 	private CallbackContext readCallback;
-	
+
 	// I/O manager to handle new incoming serial data
 	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 	private SerialInputOutputManager mSerialIoManager;
@@ -311,8 +311,9 @@ public class Serial extends CordovaPlugin {
 					try {
 						Log.d(TAG, data);
 						byte[] buffer = hexStringToByteArray(data);
-						int result = port.write(buffer, 1000);
-						callbackContext.success(result + " bytes written.");
+						port.write(buffer, 1000);
+//						int result = port.write(buffer, 1000);
+						callbackContext.success(buffer.length + " bytes written.");
 					}
 					catch (IOException e) {
 						// deal with error
@@ -353,7 +354,7 @@ public class Serial extends CordovaPlugin {
 			public void run() {
 				if (port == null) {
 					callbackContext.error("Reading a closed port.");
-				} 
+				}
 				else {
 					try {
 						int len = port.read(mReadBuffer.array(), READ_WAIT_MILLIS);
@@ -470,7 +471,7 @@ public class Serial extends CordovaPlugin {
 		});
 	}
 
-	/** 
+	/**
 	 * Paused activity handler
 	 * @see org.apache.cordova.CordovaPlugin#onPause(boolean)
 	 */
@@ -489,7 +490,7 @@ public class Serial extends CordovaPlugin {
 		}
 	}
 
-	
+
 	/**
 	 * Resumed activity handler
 	 * @see org.apache.cordova.CordovaPlugin#onResume(boolean)
@@ -500,7 +501,7 @@ public class Serial extends CordovaPlugin {
 		if (sleepOnPause) {
 			if (driver == null) {
 				Log.d(TAG, "No serial device to resume.");
-			} 
+			}
 			else {
 				UsbDeviceConnection connection = manager.openDevice(driver.getDevice());
 				if (connection != null) {
@@ -523,7 +524,7 @@ public class Serial extends CordovaPlugin {
 				}
 				Log.d(TAG, "Serial device: " + driver.getClass().getSimpleName());
 			}
-			
+
 			onDeviceStateChange();
 		}
 	}
